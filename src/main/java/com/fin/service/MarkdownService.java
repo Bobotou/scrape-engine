@@ -1,6 +1,7 @@
 package com.fin.service;
 
 import com.fin.common.ScrapeReq;
+import com.fin.common.dto.req.ResponseDTO;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.json.JSONArray;
@@ -26,7 +27,7 @@ public class MarkdownService {
     private static final String OUTPUT_DIR = "/Users/fin/Documents/markdown-output/"; // 输出目录
 
 
-    public String fetchAndSaveMarkdown(ScrapeReq scrapeReq) {
+    public ResponseDTO<String> fetchAndSaveMarkdown(ScrapeReq scrapeReq) {
         try {
             // 构造请求体
             JSONObject requestBody = new JSONObject();
@@ -69,20 +70,20 @@ public class MarkdownService {
                     String fileName = jsonObject.getJSONObject("data").getJSONObject("metadata").getString("ajs-latest-published-page-title") + ".md";
                     String outputPath = OUTPUT_DIR + fileName;
                     saveToFile(markdownContent, outputPath);
-                    return "Markdown successfully saved to " + OUTPUT_PATH;
+                    return ResponseDTO.success("Markdown successfully saved", outputPath);
                 } else {
                     String responseBody = response.body() != null ? response.body().string() : "No response body";
                     log.error("Request failed with status: {}, response body: {}", response.code(), responseBody);
-                    return "Failed to fetch markdown, status: " + response.code() + ", response: " + responseBody;
+                    return ResponseDTO.error("Failed to fetch markdown: " + responseBody, response.code());
                 }
             }
 
         } catch (IOException e) {
             log.error("Error occurred while fetching markdown: {}", e.getMessage());
-            return "Error: " + e.getMessage();
+            return ResponseDTO.error("IO error: " + e.getMessage());
         } catch (Exception e) {
             log.error("JSON parsing error: {}", e.getMessage());
-            return "JSON parsing error: " + e.getMessage();
+            return ResponseDTO.error("JSON parsing error: " + e.getMessage());
         }
     }
 
