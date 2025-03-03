@@ -2,3 +2,12 @@ server.port: 8080
 spring:
   application:
     name: scrape-engine
+
+
+scrape-engine:
+  cookie: __utma=1.947816380.1727254263.1727254263.1727254263.1; __utmc=1; __utmz=1.1727254263.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); confluence.list.pages.cookie=list-content-tree; confluence.browse.space.cookie=space-attachments; confluence.last-web-item-clicked=system.space.tools%2Fcontenttools%2Fexport; seraph.confluence=70025411%3A1b67ed90511c9d2731e8e639be989ea7c457fdc7; JSESSIONID=DFB921066EB8754CA04AA0119FFC43ACJSESSIONID=DFB921066EB8754CA04AA0119FFC43AC
+  output:
+    path: /Users/fin/Documents/markdown-output/
+
+fireCrawl:
+  host: http://127.0.0.1:3002

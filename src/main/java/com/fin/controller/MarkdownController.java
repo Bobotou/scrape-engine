@@ -1,7 +1,9 @@
 package com.fin.controller;
 
 import com.fin.common.ScrapeReq;
+import com.fin.common.dto.req.ResponseDTO;
 import com.fin.service.MarkdownService;
+import com.fin.service.MarkdownServiceDemo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,8 +15,13 @@ public class MarkdownController {
     @Autowired
     private MarkdownService markdownService;
 
+    @Autowired
+    private MarkdownServiceDemo markdownServiceDemo;
+
     @PostMapping("/fetch-markdown")
-    public String fetchMarkdown(@RequestBody ScrapeReq scrapeReq) {
+    public ResponseDTO<String> fetchMarkdown(@RequestBody ScrapeReq scrapeReq) {
         return markdownService.fetchAndSaveMarkdown(scrapeReq);
     }
+
+
 }
