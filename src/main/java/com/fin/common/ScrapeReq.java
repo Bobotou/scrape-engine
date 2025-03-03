@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * @author Fin
  * @version 1.0
@@ -14,8 +16,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ScrapeReq {
 
-    String url;
-
-    String token;
+    List<String> url;
 
 }

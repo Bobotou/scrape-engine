@@ -22,8 +22,8 @@ public class ResponseDTO<T> {
         return new ResponseDTO<>(true, message, data, 200);
     }
 
-    public static <T> ResponseDTO<T> success(String message) {
-        return new ResponseDTO<>(true, message, null, 200);
+    public static <T> ResponseDTO<T> success(T data) {
+        return new ResponseDTO<>(true, "success!", data, 200);
     }
 
     // 错误的静态方法
